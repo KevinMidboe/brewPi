@@ -1,0 +1,91 @@
+[{
+  "beer": {
+    "name": "Kveldsbris",
+    "brewery": "Kinn Bryggeri",
+    "category": "Pilsner/Lys Lager",
+    "description": ""
+  },
+  "date": "1682272800",
+  "by": ["Alf", "Kevin"],
+  "abv": "5.6",
+  "description": "",
+  "image": "kinn_kveldsbris.png",
+  "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+  "order_page": "https://oslo.bryggselv.no/finest/104923/finest-originals-utepils-allgrain-ølsett-25-liter",
+  "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024"
+}, {
+  "beer": {
+    "name": "FUCK YEAH IPA",
+    "brewery": "Finest",
+    "category": "American IPA",
+    "description": ""
+  },
+  "date": "1648922400",
+  "by": ["Alf", "Kevin"],
+  "abv": "7",
+  "description": "",
+  "image": "finest_fuck-yeah-IPA.jpg",
+  "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+  "order_page": "https://web.archive.org/web/20210225043236/https://www.bryggselv.no/finest/105943/fuck-yeah-ipa-ultra-american-west-coast-ipa-25-liter",
+  "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024"
+}, {
+  "beer": {
+    "name": "Love in a canoe",
+    "brewery": "Finest",
+    "category": "Mexican Lager",
+    "description": ""
+  },
+  "date": "1646420400",
+  "by": ["Alf", "Kevin"],
+  "abv": "4.7",
+  "description": "",
+  "image": "finest_love-in-a-canoe.jpeg",
+  "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+  "order_page": "https://oslo.bryggselv.no/finest/104092/love-in-a-canoe-allgrain-ølsett-25-liter",
+  "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024"
+}, {
+  "beer": {
+    "name": "Utepils",
+    "brewery": "Finest",
+    "category": "",
+    "description": ""
+  },
+  "date": "1637694000",
+  "by": ["Alf", "Kevin"],
+  "abv": "5.0",
+  "description": "",
+  "image": "finest_utepils.jpeg",
+  "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+  "order_page": "https://www.bryggselv.no/finest/105932/kinn-kveldsbris-allgrain-ølsett-25-liter",
+  "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024"
+}, {
+  "beer": {
+    "name": "HELLES Tysk Lager",
+    "brewery": "Münchener Helles",
+    "category": "Tysk Lager",
+    "description": ""
+  },
+  "date": "1629396000",
+  "by": ["Adrian", "Kevin", "Mats"],
+  "abv": "5.3",
+  "description": "",
+  "image": "helles_tysk-lager.jpeg",
+  "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+  "order_page": "https://oslo.bryggselv.no/finest/106231/finest-helles-allgrain-ølsett-25-liter",
+  "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024"
+}, {
+  "beer": {
+    "name": "Lazy Days Weiss",
+    "brewery": "Finest",
+    "category": "Weissbier",
+    "description": ""
+  },
+  "date": "1621706400",
+  "by": ["Alf", "Kevin", "Kristian"],
+  "abv": "5.3",
+  "description": "",
+  "image": "finest_lazy-days.jpeg",
+  "recipe": "https://docs.google.com/document/u/0/d/1I6qX4l4jDzK51GxBt3IdEv-HyNQHAx8ijc5dMlG1Xkk",
+  "order_page": "https://oslo.bryggselv.no/finest/106231/finest-helles-allgrain-ølsett-25-liter",
+  "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024"
+}]
