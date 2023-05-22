@@ -1,0 +1,57 @@
+{
+  "aggs": {
+    "2": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "fixed_interval": "30s",
+        "time_zone": "Europe/Oslo",
+        "min_doc_count": 1
+      },
+      "aggs": {
+        "1": {
+          "max": {
+            "field": "temperature"
+          }
+        }
+      }
+    }
+  },
+  "size": 0,
+  "fields": [
+    {
+      "field": "@timestamp",
+      "format": "date_time"
+    }
+  ],
+  "script_fields": {},
+  "stored_fields": ["*"],
+  "_source": {
+    "excludes": []
+  },
+  "query": {
+    "bool": {
+      "must": [],
+      "filter": [
+        {
+          "match_all": {}
+        },
+        {
+          "match_phrase": {
+            "location.keyword": "inside"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "2022-04-03T13:04:26.460Z",
+              "lte": "2022-04-03T13:19:26.460Z",
+              "format": "strict_date_optional_time"
+            }
+          }
+        }
+      ],
+      "should": [],
+      "must_not": []
+    }
+  }
+}
