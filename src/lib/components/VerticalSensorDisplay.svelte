@@ -104,13 +104,17 @@ h2 {
   justify-content: space-between;
   margin-bottom: 1.75rem;
 
-  font-size: 3rem;
+  font-size: 2.2rem;
   line-height: 1;
   font-weight: 500;
   color: var(--text-color);
 
   @include tablet {
-    font-size: 4.5rem;
+    font-size: 2.9rem;
+  }
+
+  @include desktop {
+    font-size: 3rem;
   }
 
   .unit {
