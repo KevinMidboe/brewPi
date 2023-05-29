@@ -1,4 +1,7 @@
 <script lang="ts">
+  import Graph from '../../../lib/components/Graph.svelte';
+  import { fetchTemperature, fetchHumidity } from '../../../lib/graphQueryGenerator';
+  import IChartFrame from '../../../lib/interfaces/IChartFrame';
   let height: number;
 
   // let brew = {
@@ -9,6 +12,14 @@
 
   export let data;
   let brew = data.brew;
+  let temperatureData: IChartFrame[];
+  let humidityData: IChartFrame[];
+
+  const from: Date = new Date();
+  const to = new Date(1684872000000);
+  const size = 40;
+  fetchTemperature(from, to, size, fetch).then((resp) => (temperatureData = resp));
+  fetchHumidity(from, to, size, fetch).then((resp) => (humidityData = resp));
 
   const dateFormat = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
   const dateString = new Date(Number(brew.date * 1000)).toLocaleDateString('no-NB', dateFormat);
@@ -63,6 +74,20 @@
       I 1873 ble Tuborg Bryggeri grunnlagt av Carl Frederik Tietgen på Hellerud i Danmark. I 1970
       ble Tuborg Bryggeri en del av Carlsberg.
     </p>
+
+    {#if temperatureData}
+      <div class="graph">
+        <h3>Temperature during fermentation</h3>
+        <Graph dataFrames="{temperatureData}" name="Temperature" />
+      </div>
+    {/if}
+
+    {#if humidityData}
+      <div class="graph">
+        <h3>Humidity during carbonation</h3>
+        <Graph dataFrames="{humidityData}" name="Humidity" />
+      </div>
+    {/if}
 
     <h3>Smak</h3>
     <p>
@@ -195,6 +220,18 @@
     p {
       line-height: 1.2;
       font-weight: 300;
+    }
+
+    .graph {
+      width: 100%;
+      max-height: 50vh;
+      margin-bottom: 5rem;
+
+      @include desktop {
+        float: left;
+        max-height: 450px;
+        max-width: 48%;
+      }
     }
   }
 </style>
