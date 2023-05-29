@@ -17,14 +17,11 @@
   .page-content {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 2.5em;
-    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+    margin: var(--header-height) 2.5rem 0;
 
     @include mobile {
-      padding: 1em;
+      margin: var(--header-height) 1rem 0;
     }
   }
 </style>
