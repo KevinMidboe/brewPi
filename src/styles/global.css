@@ -1,4 +1,29 @@
+:root {
+  --mobile-width: 768px;
+  --tablet-width: 1200px;
+  --background: white;
+  --backdrop: #f5f5f7;
+  --text-color: black;
+  --red: #ff97a3;
+  --blue: #9ad9ff;
+  --green: #19a786;
+
+  --header-height: 80px;
+  --color-transition-duration: 0.4s;
+}
+
+.dark {
+  --background: black;
+  --backdrop: #202124;
+  --text-color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  margin: 0;
   font-family: 'Roboto';
   background-color: var(--backdrop);
   color: var(--text-color);
@@ -7,6 +32,40 @@ body {
     border-color var(--color-transition-duration) ease-in-out,
     color var(--color-transition-duration) ease-in-out,
     font-family var(--color-transition-duration) ease-in-out;
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.card {
+  height: fit-content;
+  padding: 2.25rem 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--background);
+  transition: all 0.2s ease, background-color var(--color-transition-duration) ease-in-out;
+}
+
+.card h1 {
+  margin-top: 0;
+  text-align: center;
+}
+
+@media (min-width: var(--mobile-width)) {
+  .card {
+    padding: 2.25rem 2rem;
+  }
 }
 
 /* Nunito regular */
