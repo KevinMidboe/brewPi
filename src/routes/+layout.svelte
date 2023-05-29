@@ -8,7 +8,7 @@
 <!-- <Darkmode/> -->
 
 <div class="page-content">
-  <slot></slot>
+  <slot />
 </div>
 
 <style lang="scss">

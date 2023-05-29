@@ -23,7 +23,7 @@
 </script>
 
 
-<div class="vertical-sensor-display">
+<div class="card">
   <CardButton>
     <Activity on:click={flipCard} />
   </CardButton>
@@ -75,18 +75,6 @@
 
 <style lang="scss" module="scoped">
   @import '../../styles/media-queries.scss';
-
-.vertical-sensor-display {
-  position: relative;
-  padding: 2.25rem 1rem;
-  border-radius: 12px;
-  background-color: var(--background);
-  transition: background-color var(--color-transition-duration) ease-in-out;
-
-  @include tablet {
-    padding: 2.25rem 3rem;
-  }
-}
 
 h2 {
   font-size: 1.4rem;
