@@ -22,7 +22,7 @@
   }
 </script>
 
-<div class="relays-container">
+<div class="card">
   <h1>Manual relay controls</h1>
 
   <div class="vertical-sensor-display">
@@ -41,28 +41,15 @@
 <style lang="scss" module="scoped">
   @import '../../styles/media-queries.scss';
 
-  .relays-container {
-    height: fit-content;
-    border-radius: 12px;
-    background-color: var(--background);
-    transition: background-color var(--color-transition-duration) ease-in-out;
-    padding: 2.25rem 1rem;
-
-    @include tablet {
-      padding: 2.25rem 3rem;
-    }
-
-    h1 {
-      margin-top: 0;
-    }
-  }
-
   .vertical-sensor-display {
     position: relative;
-    height: fit-content;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
+
+    @include desktop {
+      justify-content: space-between;
+    }
   }
 
   h2 {

@@ -196,4 +196,5 @@
   });
 </script>
 
-<canvas id="{name}" bind:this="{chartCanvas}" width="400" height="400"></canvas>
+<canvas class="card" id="{name}" bind:this="{chartCanvas}" width="400" height="400"></canvas>
+

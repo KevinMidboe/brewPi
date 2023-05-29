@@ -16,7 +16,7 @@
   const wizards = brew.by.join(', ');
 </script>
 
-<section>
+<section class="card">
   <div class="desktop-only image-container" style="height: {height}px">
     <img src="/images/{ brew.image }" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
   </div>
