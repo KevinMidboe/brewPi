@@ -3,7 +3,7 @@
   import Display from '$lib/components/display.svelte'
   import VerticalSensorDisplay from '$lib/components/VerticalSensorDisplay.svelte'
   import Livestream from '$lib/components/Livestream.svelte'
-  import Navigation from '$lib/components/Navigation.svelte';
+  import BrewProgress from '$lib/components/BrewProgress.svelte';
   import type { PageData } from './$types';
   import RelayControls from '../lib/components/RelayControls.svelte';
 
@@ -14,7 +14,7 @@
 <PageHeader />
 
 <div class="vertical-grid">
-  <Navigation />
+  <BrewProgress />
 
   <VerticalSensorDisplay {inside} {outside} />
 
@@ -31,10 +31,10 @@
     grid-template-columns: 1fr;
     column-gap: 2rem;
     row-gap: 15px;
-    margin: 1rem;
+    margin: 1rem 0;
 
     @include desktop {
-      grid-template-columns: 1fr 2fr 3fr;
+      grid-template-columns: 2fr 2fr 3fr;
       margin: 2rem;
     }
   }
