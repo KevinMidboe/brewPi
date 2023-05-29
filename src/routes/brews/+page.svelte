@@ -32,6 +32,7 @@
       line-height: 1.5;
 
       a {
+        font-size: 1.2rem;
         color: #19A786;
       }
     }
