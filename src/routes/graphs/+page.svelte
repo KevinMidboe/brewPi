@@ -44,9 +44,22 @@
     fetchData('pressure', from, to, size).then((resp) => (pressureData = resp?.data));
   }
 
-<!-- <h1>Server: {emoji.emoji}</h1> -->
+  function scrollSelectedButtonIntoView() {
+    const container = document.getElementsByClassName('button-wrapper')[0];
+    const selected = document.getElementsByClassName('selected')[0] as HTMLElement;
+    const containerWidth = container.getBoundingClientRect().width;
+    const selectedWidth = selected.getBoundingClientRect().width;
 
-<input type="number" bind:value={minutes} on:input={() => reload(minutes)} />
+    // if the container is in-view, return
+    if (containerWidth > selected.offsetLeft) {
+      return;
+    }
+
+    container.scrollLeft = selected.offsetLeft - selectedWidth / 2;
+  }
+
+  onMount(scrollSelectedButtonIntoView);
+</script>
 
 <div class="button-wrapper">
   {#each buttonMinutes as button}
