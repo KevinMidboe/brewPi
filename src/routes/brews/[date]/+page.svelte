@@ -1,4 +1,7 @@
 <script lang="ts">
+  import Graph from '../../../lib/components/Graph.svelte';
+  import { fetchTemperature, fetchHumidity } from '../../../lib/graphQueryGenerator';
+  import IChartFrame from '../../../lib/interfaces/IChartFrame';
   let height: number;
 
   // let brew = {
@@ -9,6 +12,14 @@
 
   export let data;
   let brew = data.brew;
+  let temperatureData: IChartFrame[];
+  let humidityData: IChartFrame[];
+
+  const from: Date = new Date();
+  const to = new Date(1684872000000);
+  const size = 40;
+  fetchTemperature(from, to, size, fetch).then((resp) => (temperatureData = resp));
+  fetchHumidity(from, to, size, fetch).then((resp) => (humidityData = resp));
 
   const dateFormat = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
   const dateString = new Date(Number(brew.date * 1000)).toLocaleDateString('no-NB', dateFormat);
@@ -16,9 +27,9 @@
   const wizards = brew.by.join(', ');
 </script>
 
-<section>
+<section class="card">
   <div class="desktop-only image-container" style="height: {height}px">
-    <img src="/images/{ brew.image }" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
+    <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
   </div>
 
   <div class="beer-container" bind:clientHeight="{height}">
@@ -34,28 +45,28 @@
       <tbody>
         <tr>
           <td><b>Brygget:</b></td>
-          <td>{ dateString }</td>
+          <td>{dateString}</td>
         </tr>
 
         <tr>
           <td><b>Laget av:</b></td>
-          <td>{ wizards }</td>
+          <td>{wizards}</td>
         </tr>
 
         <tr>
           <td><b>Kategori:</b></td>
-          <td>{ brew.beer.category }</td>
+          <td>{brew.beer.category}</td>
         </tr>
 
         <tr>
           <td><b>Alkoholprosent:</b></td>
-          <td>~ { brew.abv }%</td>
+          <td>~ {brew.abv}%</td>
         </tr>
       </tbody>
     </table>
 
     <div class="mobile-only image-container">
-      <img src="/images/{ brew.image }" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
+      <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
     </div>
 
     <h3>Historie</h3>
@@ -63,6 +74,20 @@
       I 1873 ble Tuborg Bryggeri grunnlagt av Carl Frederik Tietgen på Hellerud i Danmark. I 1970
       ble Tuborg Bryggeri en del av Carlsberg.
     </p>
+
+    {#if temperatureData}
+      <div class="graph">
+        <h3>Temperature during fermentation</h3>
+        <Graph dataFrames="{temperatureData}" name="Temperature" />
+      </div>
+    {/if}
+
+    {#if humidityData}
+      <div class="graph">
+        <h3>Humidity during carbonation</h3>
+        <Graph dataFrames="{humidityData}" name="Humidity" />
+      </div>
+    {/if}
 
     <h3>Smak</h3>
     <p>
@@ -88,9 +113,27 @@
   section {
     @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@200;300;400;500;600;700;800&display=swap');
     font-family: 'Epilogue', sans-serif;
-    position: absolute;
-    top: 0;
-    left: 0;
+
+    padding: unset !important;
+    margin-bottom: 3rem;
+
+    @include mobile {
+      .beer-container {
+        border-radius: inherit;
+      }
+    }
+
+    @include tablet {
+      .beer-container {
+        border-top-right-radius: inherit;
+        border-bottom-right-radius: inherit;
+      }
+
+      .image-container {
+        border-top-left-radius: inherit;
+        border-bottom-left-radius: inherit;
+      }
+    }
   }
 
   .image-container {
@@ -120,7 +163,7 @@
   }
 
   .beer-container {
-    background-color: rgba(215, 224, 223, 0.6);
+    background-color: rgba(215, 224, 223, 0.8);
     padding: 2rem 1rem;
 
     @include tablet {
@@ -177,6 +220,18 @@
     p {
       line-height: 1.2;
       font-weight: 300;
+    }
+
+    .graph {
+      width: 100%;
+      max-height: 50vh;
+      margin-bottom: 5rem;
+
+      @include desktop {
+        float: left;
+        max-height: 450px;
+        max-width: 48%;
+      }
     }
   }
 </style>

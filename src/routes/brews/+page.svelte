@@ -9,7 +9,7 @@
 
 </script>
 
-<main class="page-content">
+<main class="card">
   <h1>Past brews</h1>
 
   <ul>
@@ -20,7 +20,8 @@
 </main>
 
 <style lang="scss">
-  main.page-content {
+  main.card {
+    height: calc(100vh - var(--header-height) * 2);
 
     ul {
       margin-left: 1.2em;
@@ -31,6 +32,7 @@
       line-height: 1.5;
 
       a {
+        font-size: 1.2rem;
         color: #19A786;
       }
     }
