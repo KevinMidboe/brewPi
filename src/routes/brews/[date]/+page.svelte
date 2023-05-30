@@ -1,27 +1,19 @@
 <script lang="ts">
   import Graph from '../../../lib/components/Graph.svelte';
-  import { fetchTemperature, fetchHumidity } from '../../../lib/graphQueryGenerator';
   import IChartFrame from '../../../lib/interfaces/IChartFrame';
   let height: number;
 
-  // let brew = {
-  //   recipe: 'https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ',
-  //   bryggselv: 'https://www.bryggselv.no/finest/105932/kinn-kveldsbris-allgrain-ølsett-25-liter',
-  //   untapped: 'https://untappd.com/b/kinn-bryggeri-kveldsbris/695024'
-  // }
-
   export let data;
   let brew = data.brew;
-  let temperatureData: IChartFrame[];
-  let humidityData: IChartFrame[];
+  let temperatureData: IChartFrame[] = data.graphData.temperature;
+  let humidityData: IChartFrame[] = data.graphData.humidity;
 
-  const from: Date = new Date();
-  const to = new Date(1684872000000);
-  const size = 40;
-  fetchTemperature(from, to, size, fetch).then((resp) => (temperatureData = resp));
-  fetchHumidity(from, to, size, fetch).then((resp) => (humidityData = resp));
-
-  const dateFormat = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+  const dateFormat: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  };
   const dateString = new Date(Number(brew.date * 1000)).toLocaleDateString('no-NB', dateFormat);
 
   const wizards = brew.by.join(', ');
@@ -75,19 +67,21 @@
       ble Tuborg Bryggeri en del av Carlsberg.
     </p>
 
-    {#if temperatureData}
-      <div class="graph">
-        <h3>Temperature during fermentation</h3>
-        <Graph dataFrames="{temperatureData}" name="Temperature" />
-      </div>
-    {/if}
+    <div class="graph-container">
+      {#if temperatureData}
+        <div class="graph">
+          <h3>Temperature during fermentation</h3>
+          <Graph dataFrames="{temperatureData}" name="Temperature" hideTitle="{true}" />
+        </div>
+      {/if}
 
-    {#if humidityData}
-      <div class="graph">
-        <h3>Humidity during carbonation</h3>
-        <Graph dataFrames="{humidityData}" name="Humidity" />
-      </div>
-    {/if}
+      {#if humidityData}
+        <div class="graph">
+          <h3>Humidity during carbonation</h3>
+          <Graph dataFrames="{humidityData}" name="Humidity" hideTitle="{true}" />
+        </div>
+      {/if}
+    </div>
 
     <h3>Smak</h3>
     <p>
@@ -220,6 +214,12 @@
     p {
       line-height: 1.2;
       font-weight: 300;
+    }
+
+    .graph-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
 
     .graph {
