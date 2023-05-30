@@ -1,11 +1,11 @@
-import { json } from '@sveltejs/kit';
+import { json, RequestEvent } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
 import type { RequestHandler } from './$types';
 
-// const BREWPI_URL = ''
-const BREWPI_URL = 'http://brewpi.schleppe:5000';
+const BREWPI_URL = env.BREWLOGGER_HOST;
 
-export const POST = (async ({ request }) => {
-  const { pathname } = new URL(request.url);
+export const POST = (async (event: RequestEvent) => {
+  const { pathname } = new URL(event.request.url);
 
   const options = { method: 'POST' };
   return fetch(BREWPI_URL + pathname, options)

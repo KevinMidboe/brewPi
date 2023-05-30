@@ -1,6 +1,7 @@
+import { env } from '$env/dynamic/private';
 import type { PageServerLoad } from './$types';
 
-const host = 'http://brewpi.schleppe:5000';
+const host = env.BREWLOGGER_HOST;
 const sensorsUrl = `${host}/api/sensors`;
 const relaysUrl = `${host}/api/relays`;
 
