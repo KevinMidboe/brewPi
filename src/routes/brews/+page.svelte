@@ -5,7 +5,7 @@
   const path = (date: string) => '/brews/' + String(date);
 
   const dateFormat = { year: 'numeric', month: 'short', day: 'numeric' };
-  const dateString = (date) => new Date(date * 1000).toLocaleDateString('no-NB', dateFormat);
+  const dateString = (date: number) => new Date(date * 1000).toLocaleDateString('no-NB', dateFormat);
 
 </script>
 

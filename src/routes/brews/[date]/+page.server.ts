@@ -1,8 +1,25 @@
 import { error } from '@sveltejs/kit';
 import brews from '../../../brews.json';
+import { fetchHumidity, fetchTemperature } from '../../../lib/server/graphQueryGenerator';
 import type { PageLoad } from './$types';
 
-export const load = (({ params }) => {
+async function fetchGraphData(brew) {
+  const start = new Date(brew.date * 1000 - 86400000);
+  const end = new Date(brew.date * 1000 + 4838400000);
+  const size = 200;
+
+  const [temperature, humidity] = await Promise.all([
+    fetchTemperature(start, end, size),
+    fetchHumidity(start, end, size)
+  ]);
+
+  return {
+    temperature,
+    humidity
+  };
+}
+
+export const load = (async ({ params }) => {
   const { date } = params;
   const brew = brews.find((b) => b?.date === date);
 
@@ -10,5 +27,7 @@ export const load = (({ params }) => {
     throw error(404, 'Brew not found');
   }
 
-  return { brew };
+  const graphData = await fetchGraphData(brew);
+
+  return { brew, graphData };
 }) satisfies PageLoad;
