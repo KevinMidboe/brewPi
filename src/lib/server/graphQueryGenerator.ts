@@ -1,9 +1,8 @@
-import { env } from '$env/dynamic/private';
+import { ES_HOST, ES_INDEX, ES_APIKEY } from '$env/static/private';
 import type IESTelemetry from './interfaces/IESTelemetry';
 import type IChartFrame from './interfaces/IChartFrame';
 
-const ES_ENDPOINT = `${env.ES_HOST}/${env.ES_INDEX}/_search`;
-const ES_APIKEY = env.ES_APIKEY;
+const ES_ENDPOINT = `${ES_HOST}/${ES_INDEX}/_search`;
 
 function dateToESString(date: Date) {
   return date.toISOString();

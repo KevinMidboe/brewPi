@@ -1,9 +1,8 @@
-import { env } from '$env/dynamic/private';
+import { BREWLOGGER_HOST } from '$env/static/private';
 import type { PageServerLoad } from './$types';
 
-const host = env.BREWLOGGER_HOST;
-const sensorsUrl = `${host}/api/sensors`;
-const relaysUrl = `${host}/api/relays`;
+const sensorsUrl = `${BREWLOGGER_HOST}/api/sensors`;
+const relaysUrl = `${BREWLOGGER_HOST}/api/relays`;
 
 async function getSensors() {
   return fetch(sensorsUrl)
