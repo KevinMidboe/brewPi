@@ -2,7 +2,7 @@ import type IESTelemetry from './interfaces/IESTelemetry';
 import type IChartFrame from './interfaces/IChartFrame';
 
 const TELEMETRY_ENDPOINT = 'https://elastic.schleppe.cloud/brewlogger-*/_search';
-const ES_APIKEY = 'QXlZdUY0VUJZQzVaazBEZVZBbVk6XzZja0Y5MHlRby1RSTV2OVRDbnc1dw==';
+const ES_APIKEY = 'OUZzM1JZZ0I1cGVYOTg5N0pUZEQ6T3BwQnBBalFUcXlQVTNLME15YjhyQQ==';
 
 function dateToESString(date: Date) {
   return date.toISOString();
@@ -83,8 +83,8 @@ function buildQuery(field: String, from: Date, to: Date, interval: String) {
           {
             range: {
               '@timestamp': {
-                gte: toDateString,
-                lte: fromDateString,
+                gte: fromDateString,
+                lte: toDateString,
                 format: 'strict_date_optional_time'
               }
             }
@@ -138,7 +138,7 @@ function calculateInterval(from, to, interval, size) {
   if (interval !== 'auto') {
     return interval;
   }
-  const dateMathInterval = roundInterval((from - to) / size);
+  const dateMathInterval = roundInterval((to - from) / size);
   // const dateMathIntervalMs = toMS(dateMathInterval);
   // const minMs = toMS(min);
   // if (dateMathIntervalMs !== undefined && minMs !== undefined && dateMathIntervalMs < minMs) {
@@ -148,6 +148,7 @@ function calculateInterval(from, to, interval, size) {
 }
 
 function parseTempResponse(data: IESTelemetry): IChartFrame[] {
+  console.log('got temp response:', data);
   return data?.aggregations?.data?.buckets.map((bucket) => {
     return {
       value: bucket?.maxValue?.value,
@@ -161,12 +162,7 @@ function parseLatestResponse(data: IESTelemetry) {
   return data?.hits?.hits[0]?._source;
 }
 
-export function fetchTemperature(
-  from: Date,
-  to: Date,
-  size: number = 50,
-  fetch: Function
-): Promise<IChartFrame[]> {
+export function fetchTemperature(from: Date, to: Date, size: number = 50): Promise<IChartFrame[]> {
   const fromMS = from.getTime();
   const toMS = to.getTime();
   const interval = calculateInterval(fromMS, toMS, 'auto', size);
@@ -181,18 +177,14 @@ export function fetchTemperature(
     },
     body: JSON.stringify(esSearchQuery)
   };
+  console.log('temp options:', options);
 
   return fetch(TELEMETRY_ENDPOINT, options)
     .then((resp) => resp.json())
     .then(parseTempResponse);
 }
 
-export function fetchHumidity(
-  from: Date,
-  to: Date,
-  size: number = 50,
-  fetch: Function
-): Promise<IChartFrame[]> {
+export function fetchHumidity(from: Date, to: Date, size: number = 50): Promise<IChartFrame[]> {
   const fromMS = from.getTime();
   const toMS = to.getTime();
   const interval = calculateInterval(fromMS, toMS, 'auto', size);
@@ -213,12 +205,7 @@ export function fetchHumidity(
     .then(parseTempResponse);
 }
 
-export function fetchPressure(
-  from: Date,
-  to: Date,
-  size: number = 50,
-  fetch: Function
-): Promise<IChartFrame[]> {
+export function fetchPressure(from: Date, to: Date, size: number = 50): Promise<IChartFrame[]> {
   const fromMS = from.getTime();
   const toMS = to.getTime();
   const interval = calculateInterval(fromMS, toMS, 'auto', size);
