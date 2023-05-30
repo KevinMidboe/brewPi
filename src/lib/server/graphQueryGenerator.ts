@@ -1,8 +1,9 @@
+import { env } from '$env/dynamic/private';
 import type IESTelemetry from './interfaces/IESTelemetry';
 import type IChartFrame from './interfaces/IChartFrame';
 
-const TELEMETRY_ENDPOINT = 'REPLACE_WITH_ES_HOST/brewlogger-*/_search';
-const ES_APIKEY = '***REMOVED***';
+const ES_ENDPOINT = `${env.ES_HOST}/${env.ES_INDEX}/_search`;
+const ES_APIKEY = env.ES_APIKEY;
 
 function dateToESString(date: Date) {
   return date.toISOString();
@@ -148,7 +149,6 @@ function calculateInterval(from, to, interval, size) {
 }
 
 function parseTempResponse(data: IESTelemetry): IChartFrame[] {
-  console.log('got temp response:', data);
   return data?.aggregations?.data?.buckets.map((bucket) => {
     return {
       value: bucket?.maxValue?.value,
@@ -177,9 +177,8 @@ export function fetchTemperature(from: Date, to: Date, size: number = 50): Promi
     },
     body: JSON.stringify(esSearchQuery)
   };
-  console.log('temp options:', options);
 
-  return fetch(TELEMETRY_ENDPOINT, options)
+  return fetch(ES_ENDPOINT, options)
     .then((resp) => resp.json())
     .then(parseTempResponse);
 }
@@ -200,7 +199,7 @@ export function fetchHumidity(from: Date, to: Date, size: number = 50): Promise<
     body: JSON.stringify(esSearchQuery)
   };
 
-  return fetch(TELEMETRY_ENDPOINT, options)
+  return fetch(ES_ENDPOINT, options)
     .then((resp) => resp.json())
     .then(parseTempResponse);
 }
@@ -221,7 +220,7 @@ export function fetchPressure(from: Date, to: Date, size: number = 50): Promise<
     body: JSON.stringify(esSearchQuery)
   };
 
-  return fetch(TELEMETRY_ENDPOINT, options)
+  return fetch(ES_ENDPOINT, options)
     .then((resp) => resp.json())
     .then(parseTempResponse);
 }
@@ -236,7 +235,7 @@ export function getLatestInsideReadings(fetch: Function) {
     body: JSON.stringify(buildLatestQuery('inside'))
   };
 
-  return fetch(TELEMETRY_ENDPOINT, options)
+  return fetch(ES_ENDPOINT, options)
     .then((resp) => resp.json())
     .then(parseLatestResponse);
 }
@@ -251,7 +250,7 @@ export function getLatestOutsideReadings(fetch: Function) {
     body: JSON.stringify(buildLatestQuery('outside'))
   };
 
-  return fetch(TELEMETRY_ENDPOINT, options)
+  return fetch(ES_ENDPOINT, options)
     .then((resp) => resp.json())
     .then(parseLatestResponse);
 }
