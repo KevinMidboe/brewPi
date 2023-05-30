@@ -7,9 +7,11 @@
     CategoryScale,
     LinearScale,
     PointElement,
+    Tooltip,
     Title,
     Legend
   } from 'chart.js';
+  import { getRelativePosition } from 'chart.js/helpers';
 
   import type { ChartDataset } from 'chart.js';
   import type IChartFrame from '../interfaces/IChartFrame';
@@ -20,123 +22,112 @@
     CategoryScale,
     LinearScale,
     PointElement,
+    Tooltip,
     Title,
     Legend
   );
 
   export let name: string;
   export let dataFrames: IChartFrame[];
-  export let beginAtZero: boolean = true;
+  export let hideTitle: boolean;
   let chartCanvas: HTMLCanvasElement;
   let chart: Chart;
-  let prevData: any = {};
 
-  interface IDataset {
-    labels: string[];
-    data?: ChartDataset<'line', number[]>;
-  }
+  onMount(() => renderChart());
+  afterUpdate(() => {
+    chart.destroy();
+    renderChart();
+  });
 
-  interface ITemperatureDataset extends IDataset {
-    inside: ChartDataset<'line', number[]>;
-    outside?: ChartDataset<'line', number[]>;
-  }
+  // Converts Date to format suitable for the current range displayed
+  function dateLabelsFormatedBasedOnResolution(dataFrames: IChartFrame[]): string[] {
+    const firstFrame = dataFrames[0];
+    const lastFrame = dataFrames[dataFrames.length - 1];
+    const deltaSeconds =
+      (new Date(lastFrame.key).getTime() - new Date(firstFrame.key).getTime()) / 1000;
+    let dateOptions: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    };
 
-  interface IHumidityDataset extends IDataset {}
-  interface IPressureDataset extends IDataset {}
-
-  function pad(num) {
-    if (num < 10) {
-      return `0${num}`;
+    if (deltaSeconds < 3600) {
+      dateOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    } else if (deltaSeconds <= 86400) {
+      dateOptions = { hour: 'numeric', minute: 'numeric' };
+    } else if (deltaSeconds <= 2592000) {
+      dateOptions = {
+        day: 'numeric',
+        month: 'numeric',
+        year: '2-digit',
+        hour: 'numeric',
+        minute: 'numeric'
+      };
     }
-    return num;
+
+    const scaledDate = new Intl.DateTimeFormat('no-NB', dateOptions);
+    return dataFrames.map((frame) => scaledDate.format(frame.key));
   }
 
-  function prettierDateString(date) {
-    return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${pad(date.getYear() - 100)}`;
-  }
-
-  function computeTemperatureDataset(): ITemperatureDataset {
-    const labels: string[] = dataFrames.map(
-      (frame) => prettierDateString(new Date(frame.key)) || String(frame.key_as_string)
-    );
-    const data: number[] = dataFrames.map((frame) => frame.value);
-
-    return {
-      labels,
-      inside: {
-        label: '℃ inside',
-        borderColor: '#10e783',
-        backgroundColor: '#c8f9df',
-        lineTension: 0.5,
-        borderWidth: 3,
-        data
-      }
-    };
-  }
-
-  function computeHumidityDataset(): IHumidityDataset {
-    const labels: string[] = dataFrames.map(
-      (frame) => prettierDateString(new Date(frame.key)) || String(frame.key_as_string)
-    );
-    const data: number[] = dataFrames.map((frame) => frame.value);
-
-    return {
-      labels,
-      data: {
-        label: '% humidity',
-        borderColor: '#57d2fb',
-        backgroundColor: '#d4f2fe',
-        lineTension: 0.5,
-        borderWidth: 3,
-        data
-      }
-    };
-  }
-
-  function computePressureDataset(): IPressureDataset {
-    const labels: string[] = dataFrames.map(
-      (frame) => prettierDateString(new Date(frame.key)) || String(frame.key_as_string)
-    );
-    const data: number[] = dataFrames.map((frame) => frame.value);
-
-    return {
-      labels,
-      data: {
+  // set dataset label & colors matching the name sent as prop
+  function setDataColorAndName(data: ChartDataset) {
+    if (name === 'Pressure') {
+      Object.assign(data, {
         label: 'Bar of pressure',
         borderColor: '#ef5878',
-        backgroundColor: '#fbd7de',
-        lineTension: 0.5,
-        borderWidth: 3,
-        data
-      }
-    };
+        backgroundColor: '#fbd7de'
+      });
+    } else if (name === 'Humidity') {
+      Object.assign(data, {
+        label: '% humidity',
+        borderColor: '#57d2fb',
+        backgroundColor: '#d4f2fe'
+      });
+    } else if (name === 'Temperature') {
+      Object.assign(data, {
+        label: '℃ inside',
+        borderColor: '#10e783',
+        backgroundColor: '#c8f9df'
+      });
+    }
   }
 
   function renderChart() {
-    const context: CanvasRenderingContext2D = chartCanvas.getContext('2d');
+    const context: CanvasRenderingContext2D | null = chartCanvas.getContext('2d');
+    if (!context) return
 
-    let dataset: IDataset | ITemperatureDataset | IHumidityDataset | IPressureDataset;
-    if (name === 'Temperature') dataset = computeTemperatureDataset();
-    else if (name === 'Humidity') dataset = computeHumidityDataset();
-    else if (name === 'Pressure') dataset = computePressureDataset();
+    // create labels and singular dataset (data)
+    const labels: string[] = dateLabelsFormatedBasedOnResolution(dataFrames);
+    const data: ChartDataset = {
+      data: dataFrames.map((frame) => frame.value),
+      borderWidth: 3,
+    };
+    // based on name, add label and color options to dataset
+    setDataColorAndName(data)
 
+
+    // create chart instance, most here is chart options
     chart = new Chart(context, {
       type: 'line',
       data: {
-        labels: dataset.labels,
-        datasets: [dataset?.inside || dataset.data]
+        labels: labels,
+        datasets: [data]
       },
       options: {
         elements: {
           point: {
-            radius: 1
+            radius: 2
+          },
+          line: {
+            tension: 0.5
           }
         },
         maintainAspectRatio: false,
         plugins: {
           title: {
-            display: true,
+            display: !hideTitle,
             position: 'left',
+            position: 'top',
             text: `${name} over time`,
             font: {
               size: 20
@@ -163,7 +154,20 @@
               // },
               mode: 'xy'
             }
+          },
+          tooltip: {
+            titleFont: {
+              size: 14
+            },
+            bodyFont: {
+              size: 14
+            },
+            enabled: true
           }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index'
         },
         scales: {
           y: {
@@ -187,14 +191,6 @@
 
     chart.update();
   }
-
-  onMount(() => renderChart());
-  afterUpdate(() => {
-    console.log('after update run');
-    chart.destroy();
-    renderChart();
-  });
 </script>
 
-<canvas class="card" id="{name}" bind:this="{chartCanvas}" width="400" height="400"></canvas>
-
+<canvas id="{name}" bind:this="{chartCanvas}" width="400" height="400"></canvas>
