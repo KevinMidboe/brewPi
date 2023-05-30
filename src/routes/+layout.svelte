@@ -1,5 +1,5 @@
 <script lang="ts">
-  import HeaderComponent from '$lib/components/Header.svelte';
+  import HeaderComponent from '../lib/components/Header.svelte';
   // import Darkmode from '$lib/components/Darkmode.svelte'
   import '../styles/global.css';
 </script>

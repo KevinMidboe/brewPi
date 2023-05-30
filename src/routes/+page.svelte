@@ -1,13 +1,12 @@
 <script lang="ts">
-  import PageHeader from '$lib/components/PageHeader.svelte'
-  import Display from '$lib/components/display.svelte'
-  import VerticalSensorDisplay from '$lib/components/VerticalSensorDisplay.svelte'
-  import Livestream from '$lib/components/Livestream.svelte'
-  import BrewProgress from '$lib/components/BrewProgress.svelte';
+  import PageHeader from '../lib/components/PageHeader.svelte';
+  import VerticalSensorDisplay from '../lib/components/VerticalSensorDisplay.svelte';
+  // import Livestream from '$lib/components/Livestream.svelte'
+  import BrewProgress from '../lib/components/BrewProgress.svelte';
   import type { PageData } from './$types';
   import RelayControls from '../lib/components/RelayControls.svelte';
 
-  export let data: PageData
+  export let data: PageData;
   const { inside, outside, relays } = data;
 </script>
 
@@ -16,9 +15,9 @@
 <div class="vertical-grid">
   <BrewProgress />
 
-  <VerticalSensorDisplay {inside} {outside} />
+  <VerticalSensorDisplay inside="{inside}" outside="{outside}" />
 
-  <RelayControls {relays} />
+  <RelayControls relays="{relays}" />
 
   <!-- <Livestream /> -->
 </div>
