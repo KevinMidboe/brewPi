@@ -120,7 +120,7 @@
         );
 
         background-size: 150px 150px;
-        animation: move-it 12s linear infinite;
+        animation: move-it 8s linear infinite;
       }
 
       @keyframes move-it {
