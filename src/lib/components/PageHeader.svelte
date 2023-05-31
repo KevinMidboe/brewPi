@@ -24,6 +24,11 @@
     }
   }
 
+  img.mobile-only {
+    width: 100%;
+    max-width: 350px;
+  }
+
   .subtitle {
     font-size: 2rem;
   }
