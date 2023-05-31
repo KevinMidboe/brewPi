@@ -1,6 +1,9 @@
 <div class="page-header">
-  <h1>Schleppe Brew</h1>
+  <img class="desktop-only" src="/branding/logo_landscape-2.png" alt="Schleppe brew logo" />
+  <img class="mobile-only" src="/branding/logo-2.png" alt="Schleppe brew logo" />
+<!--  <h1>Schleppe Brew</h1>
   <span class="subtitle">Monitor beer brewing refridgerator</span>
+-->
 </div>
 
 <style lang="scss" module="scoped">
