@@ -173,8 +173,12 @@
   @import '../../styles/media-queries.scss';
 
   .mobile-only {
-    margin: 0 auto;
-    max-width: 400px;
+    display: flex;
+    place-content: center;
+  }
+
+  :global(.mobile-only > svg) {
+    max-width: 340px;
   }
 
   .desktop-only {
