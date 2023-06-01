@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PageHeader from '../lib/components/PageHeader.svelte';
+  import Logo from '../lib/components/Logo.svelte';
   import VerticalSensorDisplay from '../lib/components/VerticalSensorDisplay.svelte';
   // import Livestream from '$lib/components/Livestream.svelte'
   import BrewProgress from '../lib/components/BrewProgress.svelte';
@@ -10,7 +10,7 @@
   const { inside, outside, relays } = data;
 </script>
 
-<PageHeader />
+<Logo />
 
 <div class="vertical-grid">
   <BrewProgress />
