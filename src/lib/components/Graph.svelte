@@ -119,7 +119,7 @@
         },
         elements: {
           point: {
-            radius: 2
+            radius: 0
           },
           line: {
             tension: 0.5
