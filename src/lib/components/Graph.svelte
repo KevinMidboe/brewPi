@@ -94,17 +94,16 @@
 
   function renderChart() {
     const context: CanvasRenderingContext2D | null = chartCanvas.getContext('2d');
-    if (!context) return
+    if (!context) return;
 
     // create labels and singular dataset (data)
     const labels: string[] = dateLabelsFormatedBasedOnResolution(dataFrames);
     const data: ChartDataset = {
       data: dataFrames.map((frame) => frame.value),
-      borderWidth: 3,
+      borderWidth: 3
     };
     // based on name, add label and color options to dataset
-    setDataColorAndName(data)
-
+    setDataColorAndName(data);
 
     // create chart instance, most here is chart options
     chart = new Chart(context, {

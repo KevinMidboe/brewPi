@@ -21,7 +21,14 @@
     return fetch(`/api/graph/${unit}`, options).then((resp) => resp.json());
   }
 
-  const buttonMinutes = [
+  interface IButtonMinute {
+    value: number;
+    name: string;
+  }
+
+  let timeout: ReturnType<typeof setTimeout>;
+  const buttonMinutes: Array<IButtonMinute> = [
+    { value: 2.4, name: 'Realtime' },
     { value: 15, name: 'Last 15 minutes' },
     { value: 60, name: 'Last hour' },
     { value: 360, name: 'Last 6 hours' },
@@ -33,8 +40,9 @@
     { value: 518400, name: 'Last year' }
   ];
 
-  function reload(mins: number) {
-    minutes = mins;
+  function reload(button: IButtonMinute) {
+    minutes = button.value;
+    clearTimeout(timeout);
     const to: Date = new Date();
     const from = new Date(to.getTime() - minutes * 60 * 1000);
     const size = 40;
@@ -42,6 +50,10 @@
     fetchData('temperature', from, to, size).then((resp) => (temperatureData = resp?.data));
     fetchData('humidity', from, to, size).then((resp) => (humidityData = resp?.data));
     fetchData('pressure', from, to, size).then((resp) => (pressureData = resp?.data));
+
+    if (button.name === 'Realtime') {
+      timeout = setTimeout(() => reload(button), 2000);
+    }
   }
 
   function scrollSelectedButtonIntoView() {
@@ -63,9 +75,8 @@
 
 <div class="button-wrapper">
   {#each buttonMinutes as button}
-    <button
-      on:click="{() => reload(button.value)}"
-      class="{button.value === minutes ? 'selected' : ''}">{button.name}</button
+    <button on:click="{() => reload(button)}" class="{button.value === minutes ? 'selected' : ''}"
+      >{button.name}</button
     >
   {/each}
 </div>
