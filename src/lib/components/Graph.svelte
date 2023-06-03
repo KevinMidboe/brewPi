@@ -114,6 +114,9 @@
         datasets: [data]
       },
       options: {
+        animation: {
+          duration: 0
+        },
         elements: {
           point: {
             radius: 2
