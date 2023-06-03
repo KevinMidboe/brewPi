@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import Graph from '../../lib/components/Graph.svelte';
   import type IChartFrame from '../../lib/interfaces/IChartFrame';
   import type { PageData } from './$types';
@@ -71,6 +71,7 @@
   }
 
   onMount(scrollSelectedButtonIntoView);
+  onDestroy(() => clearTimeout(timeout))
 </script>
 
 <div class="button-wrapper">
