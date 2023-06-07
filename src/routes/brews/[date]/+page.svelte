@@ -5,8 +5,8 @@
 
   export let data;
   let brew = data.brew;
-  let temperatureData: IChartFrame[] = data.graphData.temperature;
-  let humidityData: IChartFrame[] = data.graphData.humidity;
+  let temperatureData: IChartFrame[] = data?.graphData?.temperature;
+  let humidityData: IChartFrame[] = data?.graphData?.humidity;
 
   const dateFormat: Intl.DateTimeFormatOptions = {
     weekday: 'long',
@@ -65,14 +65,14 @@
     <p>{brew.description}</p>
 
     <div class="graph-container">
-      {#if temperatureData}
+      {#if temperatureData && temperatureData?.length}
         <div class="graph">
           <h3>Temperature during fermentation</h3>
           <Graph dataFrames="{temperatureData}" name="Temperature" hideTitle="{true}" />
         </div>
       {/if}
 
-      {#if humidityData}
+      {#if humidityData && temperatureData?.length}
         <div class="graph">
           <h3>Humidity during carbonation</h3>
           <Graph dataFrames="{humidityData}" name="Humidity" hideTitle="{true}" />
