@@ -20,11 +20,11 @@
 </script>
 
 <section class="card">
-  <div class="desktop-only image-container" style="height: {height}px">
+  <div class="desktop-only image-container" style="height: {height}px; background-color: {brew.color_primary || '#93a4a0'}">
     <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
   </div>
 
-  <div class="beer-container" bind:clientHeight="{height}">
+  <div class="beer-container" bind:clientHeight="{height}" style="background-color: {brew.color_secondary || '#DFE6E5'}">
     <h1>{brew.beer.name}</h1>
 
     <div class="links">
@@ -61,11 +61,8 @@
       <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
     </div>
 
-    <h3>Historie</h3>
-    <p>
-      I 1873 ble Tuborg Bryggeri grunnlagt av Carl Frederik Tietgen på Hellerud i Danmark. I 1970
-      ble Tuborg Bryggeri en del av Carlsberg.
-    </p>
+    <h3>Beskrivelse</h3>
+    <p>{brew.description}</p>
 
     <div class="graph-container">
       {#if temperatureData}
@@ -134,7 +131,6 @@
     display: flex;
     justify-content: center;
     min-height: 1px;
-    background-color: #93a4a0;
     padding: 3rem 1rem;
 
     @include tablet {
