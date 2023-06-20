@@ -57,7 +57,7 @@
       </tbody>
     </table>
 
-    <div class="mobile-only image-container">
+    <div class="mobile-only image-container" style="background-color: {brew.color_primary || '#93a4a0'}">
       <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
     </div>
 
@@ -140,7 +140,8 @@
     }
 
     @include mobile {
-      margin: 2rem 0;
+      width: calc(100% + 2rem);
+      margin: 2rem 0 2rem -1rem;
     }
 
     img {
