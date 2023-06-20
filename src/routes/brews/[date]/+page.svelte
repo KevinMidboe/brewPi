@@ -231,4 +231,10 @@
       }
     }
   }
+
+  :global(canvas) {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 0 0.2rem;
+  }
 </style>
