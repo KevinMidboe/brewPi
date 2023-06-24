@@ -77,7 +77,10 @@
 <div class="card">
   <h1>Brew progress</h1>
 
-  <h2>{brew.name} <span class="company">av {brew.by}</span></h2>
+  <a href="{`/brews/${brew.date}`}" class="brew">
+    <h2>{brew.name} <span class="company">av {brew.by}</span></h2>
+    <ArrowRight />
+  </a>
 
   <ol class="os-timeline">
     {#each steps as step, index}
@@ -111,10 +114,43 @@
 </div>
 
 <style lang="scss">
-  .company {
-    font-size: 1.25rem;
-    opacity: 0.8;
-    display: inline-block;
+  a.brew {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0;
+    }
+
+    .company {
+      font-size: 1.25rem;
+      line-height: 1;
+      margin-left: 6px;
+      opacity: 0.8;
+      display: inline-block;
+      flex-grow: 1;
+    }
+  }
+
+  :global(a.brew:hover svg) {
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateX(0);
+    }
+    40% {
+      transform: translateX(-5px);
+    }
+    60% {
+      transform: translateX(-3px);
+    }
   }
 
   .description {
