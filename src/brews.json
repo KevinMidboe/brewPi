@@ -1,110 +1,129 @@
-[
-  {
-    "beer": {
-      "name": "Kveldsbris",
-      "brewery": "Kinn Bryggeri",
-      "category": "Belgian Pale Ale",
-      "description": ""
+{
+  "brews": [
+    {
+      "beer": {
+        "name": "Hazyday Hero",
+        "brewery": "Amundsen",
+        "category": "Hazy Session IPA"
+      },
+      "date": "1687631876",
+      "by": ["Andreas", "Ingvild", "Kevin"],
+      "abv": "4.2",
+      "description": "Bright aromas of orange peel and assorted citrus dominate, with floral undertones. Light bodied, but round and smooth. Flavours of orange and grapefruit juice backed by sweet sherbet. A soft palate makes for an easy drinking session IPA.",
+      "image": "amundsen_hazyday-hero.jpg",
+      "recipe": "https://www.dropbox.com/s/a5xl975lhflvspn/Hazyday%20Hero%2025ltr.pdf?dl=0",
+      "order_page": "https://www.hopstore.no/products/amundsen-everyday-hero-25l-olsett",
+      "untapped": "https://untappd.com/b/amundsen-brewery-hazyday-hero/4780922",
+      "color_primary": "#7AC49F",
+      "secondary_color": "rgba(122, 196, 159, 0.2)"
     },
-    "date": "1682272800",
-    "by": ["Alf", "Kevin"],
-    "abv": "5.6",
-    "description": "Kveldsbris - Evening Breeze - is offered as a clean, refreshing and not-too-alcoholic Belgian ale. It has a fine balance of Belgian yeastiness with the premier hop varieties from three wildly different districts: East Kent Goldings on England's south coast, Saaz from Zatec in the Czech Republic, and Amarillo from Yakima Valley in the United States of America. Kveldsbris is a most versatile table ale that can cope with more spiciness and richness than a regular wheat beer.",
-    "image": "kinn_kveldsbris.png",
-    "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
-    "order_page": "https://oslo.bryggselv.no/finest/104923/finest-originals-utepils-allgrain-ølsett-25-liter",
-    "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
-    "color_primary": "#FCF28F",
-    "color_secondary": "rgba(252, 242, 143, 0.2)"
-  },
-  {
-    "beer": {
-      "name": "FUCK YEAH IPA",
-      "brewery": "Finest",
-      "category": "American IPA",
-      "description": ""
+    {
+      "beer": {
+        "name": "Kveldsbris",
+        "brewery": "Kinn Bryggeri",
+        "category": "Belgian Pale Ale",
+        "description": ""
+      },
+      "date": "1682272800",
+      "by": ["Alf", "Kevin"],
+      "abv": "5.6",
+      "description": "Kveldsbris - Evening Breeze - is offered as a clean, refreshing and not-too-alcoholic Belgian ale. It has a fine balance of Belgian yeastiness with the premier hop varieties from three wildly different districts: East Kent Goldings on England's south coast, Saaz from Zatec in the Czech Republic, and Amarillo from Yakima Valley in the United States of America. Kveldsbris is a most versatile table ale that can cope with more spiciness and richness than a regular wheat beer.",
+      "image": "kinn_kveldsbris.png",
+      "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+      "order_page": "https://oslo.bryggselv.no/finest/104923/finest-originals-utepils-allgrain-ølsett-25-liter",
+      "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
+      "color_primary": "#FCF28F",
+      "color_secondary": "rgba(252, 242, 143, 0.2)"
     },
-    "date": "1648922400",
-    "by": ["Alf", "Kevin"],
-    "abv": "7",
-    "description": "",
-    "image": "finest_fuck-yeah-IPA.jpg",
-    "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
-    "order_page": "https://web.archive.org/web/20210225043236/https://www.bryggselv.no/finest/105943/fuck-yeah-ipa-ultra-american-west-coast-ipa-25-liter",
-    "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
-    "color_primary": "#0169A6",
-    "color_secondary": "rgba(1, 105, 166, 0.2)"
-  },
-  {
-    "beer": {
-      "name": "Love in a canoe",
-      "brewery": "Finest",
-      "category": "Mexican Lager",
-      "description": ""
+    {
+      "beer": {
+        "name": "FUCK YEAH IPA",
+        "brewery": "Finest",
+        "category": "American IPA",
+        "description": ""
+      },
+      "date": "1648922400",
+      "by": ["Alf", "Kevin"],
+      "abv": "7",
+      "description": "",
+      "image": "finest_fuck-yeah-IPA.jpg",
+      "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+      "order_page": "https://web.archive.org/web/20210225043236/https://www.bryggselv.no/finest/105943/fuck-yeah-ipa-ultra-american-west-coast-ipa-25-liter",
+      "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
+      "color_primary": "#0169A6",
+      "color_secondary": "rgba(1, 105, 166, 0.2)"
     },
-    "date": "1646420400",
-    "by": ["Alf", "Kevin"],
-    "abv": "4.7",
-    "description": "",
-    "image": "finest_love-in-a-canoe.jpeg",
-    "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
-    "order_page": "https://oslo.bryggselv.no/finest/104092/love-in-a-canoe-allgrain-ølsett-25-liter",
-    "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
-    "color_primary": "#F7F0DF",
-    "color_secondary": "rgba(247, 240, 223, 0.2)"
-  },
-  {
-    "beer": {
-      "name": "Utepils",
-      "brewery": "Finest",
-      "category": "",
-      "description": ""
+    {
+      "beer": {
+        "name": "Love in a canoe",
+        "brewery": "Finest",
+        "category": "Mexican Lager",
+        "description": ""
+      },
+      "date": "1646420400",
+      "by": ["Alf", "Kevin"],
+      "abv": "4.7",
+      "description": "",
+      "image": "finest_love-in-a-canoe.jpeg",
+      "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+      "order_page": "https://oslo.bryggselv.no/finest/104092/love-in-a-canoe-allgrain-ølsett-25-liter",
+      "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
+      "color_primary": "#F7F0DF",
+      "color_secondary": "rgba(247, 240, 223, 0.2)"
     },
-    "date": "1637694000",
-    "by": ["Alf", "Kevin"],
-    "abv": "5.0",
-    "description": "",
-    "image": "finest_utepils.jpeg",
-    "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
-    "order_page": "https://www.bryggselv.no/finest/105932/kinn-kveldsbris-allgrain-ølsett-25-liter",
-    "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
-    "color_primary": "#F4E9D3",
-    "color_secondary": "rgba(244, 233, 211, 0.2)"
-  },
-  {
-    "beer": {
-      "name": "HELLES Tysk Lager",
-      "brewery": "Münchener Helles",
-      "category": "Tysk Lager",
-      "description": ""
+    {
+      "beer": {
+        "name": "Utepils",
+        "brewery": "Finest",
+        "category": "",
+        "description": ""
+      },
+      "date": "1637694000",
+      "by": ["Alf", "Kevin"],
+      "abv": "5.0",
+      "description": "",
+      "image": "finest_utepils.jpeg",
+      "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+      "order_page": "https://www.bryggselv.no/finest/105932/kinn-kveldsbris-allgrain-ølsett-25-liter",
+      "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
+      "color_primary": "#F4E9D3",
+      "color_secondary": "rgba(244, 233, 211, 0.2)"
     },
-    "date": "1629396000",
-    "by": ["Adrian", "Kevin", "Mats"],
-    "abv": "5.3",
-    "description": "",
-    "image": "helles_tysk-lager.jpeg",
-    "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
-    "order_page": "https://oslo.bryggselv.no/finest/106231/finest-helles-allgrain-ølsett-25-liter",
-    "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
-    "color_primary": "#C5893D",
-    "color_secondary": "rgba(197, 137, 61, 0.2)"
-  },
-  {
-    "beer": {
-      "name": "Lazy Days Weiss",
-      "brewery": "Finest",
-      "category": "Weissbier",
-      "description": ""
+    {
+      "beer": {
+        "name": "HELLES Tysk Lager",
+        "brewery": "Münchener Helles",
+        "category": "Tysk Lager",
+        "description": ""
+      },
+      "date": "1629396000",
+      "by": ["Adrian", "Kevin", "Mats"],
+      "abv": "5.3",
+      "description": "",
+      "image": "helles_tysk-lager.jpeg",
+      "recipe": "https://docs.google.com/document/d/1FL7ibXxW1r_zFNLK338pyjfMiCCaTOi2fzuMoInA3dQ",
+      "order_page": "https://oslo.bryggselv.no/finest/106231/finest-helles-allgrain-ølsett-25-liter",
+      "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
+      "color_primary": "#C5893D",
+      "color_secondary": "rgba(197, 137, 61, 0.2)"
     },
-    "date": "1621706400",
-    "by": ["Alf", "Kevin", "Kristian"],
-    "abv": "5.3",
-    "description": "",
-    "image": "finest_lazy-days.jpeg",
-    "recipe": "https://docs.google.com/document/u/0/d/1I6qX4l4jDzK51GxBt3IdEv-HyNQHAx8ijc5dMlG1Xkk",
-    "order_page": "https://oslo.bryggselv.no/finest/106231/finest-helles-allgrain-ølsett-25-liter",
-    "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
-    "color_primary": "#6C8D9E",
-    "color_secondary": "rgba(108, 141, 158, 0.2)"
-  }
-]
+    {
+      "beer": {
+        "name": "Lazy Days Weiss",
+        "brewery": "Finest",
+        "category": "Weissbier",
+        "description": ""
+      },
+      "date": "1621706400",
+      "by": ["Alf", "Kevin", "Kristian"],
+      "abv": "5.3",
+      "description": "",
+      "image": "finest_lazy-days.jpeg",
+      "recipe": "https://docs.google.com/document/u/0/d/1I6qX4l4jDzK51GxBt3IdEv-HyNQHAx8ijc5dMlG1Xkk",
+      "order_page": "https://oslo.bryggselv.no/finest/106231/finest-helles-allgrain-ølsett-25-liter",
+      "untapped": "https://untappd.com/b/kinn-bryggeri-kveldsbris/695024",
+      "color_primary": "#6C8D9E",
+      "color_secondary": "rgba(108, 141, 158, 0.2)"
+    }
+  ]
+}
