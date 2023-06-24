@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import brews from '../../brews.json';
   import ArrowRight from '../icons/ArrowRight.svelte';
 
@@ -38,6 +39,10 @@
   };
 
   let isOpen: number | null;
+
+  onMount(() =>
+    setTimeout(() => document.querySelector('a.brew svg')?.classList.add('animate'), 1800)
+  );
 
   const steps: Array<IStep> = [
     {
@@ -135,7 +140,7 @@
     }
   }
 
-  :global(a.brew:hover svg) {
+  :global(a.brew:hover svg, a.brew svg.animate) {
     animation: bounce 2s infinite;
   }
 
