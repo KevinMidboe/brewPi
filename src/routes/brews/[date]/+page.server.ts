@@ -21,7 +21,7 @@ async function fetchGraphData(brew) {
 
 export const load = (async ({ params }) => {
   const { date } = params;
-  const brew = brews.find((b) => b?.date === date);
+  const brew = brews.brews.find((b) => b?.date === date);
 
   if (!brew) {
     throw error(404, 'Brew not found');

@@ -9,7 +9,7 @@
   let loadedTime: number = new Date().getTime();
   let currentTime: number = new Date().getTime();
   let autoReload = false;
-  const currentGoal = 4;
+  const currentGoal = 18.5;
 
   function updateTime() {
     currentTime = new Date().getTime();
