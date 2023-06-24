@@ -108,9 +108,11 @@
 
   {#each steps as step, index}
     <div class="{`description ${isOpen === index && 'isOpen'}`}">
-      <p>{ step.description }</p>
+      <p>{step.description}</p>
     </div>
   {/each}
+
+  <i class="info">{!isOpen ? 'Click icon for description' : 'Click icon to close'}</i>
 </div>
 
 <style lang="scss">
@@ -167,6 +169,14 @@
     &.isOpen {
       grid-template-rows: 1fr;
     }
+  }
+
+  i.info {
+    display: block;
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: -1rem;
+    color: #737373;
   }
 
   ol {
