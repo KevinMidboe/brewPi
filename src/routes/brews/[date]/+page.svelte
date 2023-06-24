@@ -5,8 +5,8 @@
 
   export let data;
   let brew = data.brew;
-  let temperatureData: IChartFrame[] = data.graphData.temperature;
-  let humidityData: IChartFrame[] = data.graphData.humidity;
+  let temperatureData: IChartFrame[] = data?.graphData?.temperature;
+  let humidityData: IChartFrame[] = data?.graphData?.humidity;
 
   const dateFormat: Intl.DateTimeFormatOptions = {
     weekday: 'long',
@@ -20,11 +20,11 @@
 </script>
 
 <section class="card">
-  <div class="desktop-only image-container" style="height: {height}px">
+  <div class="desktop-only image-container" style="height: {height}px; background-color: {brew.color_primary || '#93a4a0'}">
     <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
   </div>
 
-  <div class="beer-container" bind:clientHeight="{height}">
+  <div class="beer-container" bind:clientHeight="{height}" style="background-color: {brew.color_secondary || '#DFE6E5'}">
     <h1>{brew.beer.name}</h1>
 
     <div class="links">
@@ -57,25 +57,22 @@
       </tbody>
     </table>
 
-    <div class="mobile-only image-container">
+    <div class="mobile-only image-container" style="background-color: {brew.color_primary || '#93a4a0'}">
       <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
     </div>
 
-    <h3>Historie</h3>
-    <p>
-      I 1873 ble Tuborg Bryggeri grunnlagt av Carl Frederik Tietgen på Hellerud i Danmark. I 1970
-      ble Tuborg Bryggeri en del av Carlsberg.
-    </p>
+    <h3>Beskrivelse</h3>
+    <p>{brew.description}</p>
 
     <div class="graph-container">
-      {#if temperatureData}
+      {#if temperatureData && temperatureData?.length}
         <div class="graph">
           <h3>Temperature during fermentation</h3>
           <Graph dataFrames="{temperatureData}" name="Temperature" hideTitle="{true}" />
         </div>
       {/if}
 
-      {#if humidityData}
+      {#if humidityData && temperatureData?.length}
         <div class="graph">
           <h3>Humidity during carbonation</h3>
           <Graph dataFrames="{humidityData}" name="Humidity" hideTitle="{true}" />
@@ -134,7 +131,6 @@
     display: flex;
     justify-content: center;
     min-height: 1px;
-    background-color: #93a4a0;
     padding: 3rem 1rem;
 
     @include tablet {
@@ -144,7 +140,8 @@
     }
 
     @include mobile {
-      margin: 2rem 0;
+      width: calc(100% + 2rem);
+      margin: 2rem 0 2rem -1rem;
     }
 
     img {
@@ -233,5 +230,11 @@
         max-width: 48%;
       }
     }
+  }
+
+  :global(canvas) {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 0 0.2rem;
   }
 </style>
