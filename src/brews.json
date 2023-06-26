@@ -2,20 +2,20 @@
   "brews": [
     {
       "beer": {
-        "name": "Hazyday Hero",
+        "name": "Ink & Dagger",
         "brewery": "Amundsen",
         "category": "Hazy Session IPA"
       },
       "date": "1687631876",
       "by": ["Andreas", "Ingvild", "Kevin"],
       "abv": "4.2",
-      "description": "Bright aromas of orange peel and assorted citrus dominate, with floral undertones. Light bodied, but round and smooth. Flavours of orange and grapefruit juice backed by sweet sherbet. A soft palate makes for an easy drinking session IPA.",
-      "image": "amundsen_hazyday-hero.jpg",
-      "recipe": "https://www.dropbox.com/s/a5xl975lhflvspn/Hazyday%20Hero%2025ltr.pdf?dl=0",
-      "order_page": "https://www.hopstore.no/products/amundsen-everyday-hero-25l-olsett",
-      "untapped": "https://untappd.com/b/amundsen-brewery-hazyday-hero/4780922",
-      "color_primary": "#7AC49F",
-      "secondary_color": "rgba(122, 196, 159, 0.2)"
+      "description": "Ink & Dagger - Den legendariske IPA`en fra Amundsen Bryggeri er et unikt bryggesett som vil ta deg med på en smaksopplevelse du sent vil glemme. Med et imponerende utvalg av humler, gir dette ølet en kompleks og balansert smak som vil tilfredsstille enhver ølentusiast..",
+      "image": "amundsen_ink-dagger.jpg",
+      "recipe": "https://www.dropbox.com/s/uqscpf5jsnxg7fv/Ink%20and%20Dagger%2025ltr.pdf?dl=0",
+      "order_page": "https://www.hopstore.no/products/amundsen-ink-and-dagger-25l-olsett",
+      "untapped": "https://untappd.com/b/amundsen-bryggeri-ink-and-dagger/1785462",
+      "color_primary": "#76C5BF",
+      "secondary_color": "rgba(118, 197, 191, 0.2)"
     },
     {
       "beer": {
