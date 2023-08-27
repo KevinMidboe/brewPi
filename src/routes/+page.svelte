@@ -1,10 +1,10 @@
 <script lang="ts">
   import Logo from '../lib/components/Logo.svelte';
   import VerticalSensorDisplay from '../lib/components/VerticalSensorDisplay.svelte';
-  // import Livestream from '$lib/components/Livestream.svelte'
   import BrewProgress from '../lib/components/BrewProgress.svelte';
-  import type { PageData } from './$types';
   import RelayControls from '../lib/components/RelayControls.svelte';
+  import type { PageData } from './$types';
+  import type { IStateDTO } from '../lib/interfaces/IStateDTO';
 
   export let data: PageData;
   const { inside, outside, relays } = data;
@@ -15,7 +15,7 @@
 <div class="vertical-grid">
   <BrewProgress />
 
-  <VerticalSensorDisplay inside="{inside}" outside="{outside}" />
+  <VerticalSensorDisplay {inside} {outside} {relays} {state} />
 
   <RelayControls relays="{relays}" />
 

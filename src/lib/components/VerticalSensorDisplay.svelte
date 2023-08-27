@@ -1,22 +1,31 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  import CardButton from "./CardButton.svelte";
-  import Activity from "../icons/Activity.svelte";
+  import { onMount } from 'svelte';
+  import CardButton from './CardButton.svelte';
+  import Activity from '../icons/Activity.svelte';
+  import { ISensorDTO } from '../interfaces/ISensorDTO';
+  import { IRelaysDTO } from '../interfaces/IRelaysDTO';
+  import { IStateDTO } from '../interfaces/IStateDTO';
 
-  export let inside;
-  export let outside;
+  export let inside: ISensorDTO;
+  export let outside: ISensorDTO;
+  export let relays: IRelaysDTO[] = [];
+  export let state: IStateDTO;
 
   let loadedTime: number = new Date().getTime();
   let currentTime: number = new Date().getTime();
   let autoReload = false;
-  const currentGoal = 18.5;
 
   function updateTime() {
     currentTime = new Date().getTime();
   }
 
   function flipCard(): void {
-    console.log("flip-a-delphia")
+    console.log('flip-a-delphia');
+  }
+
+  function tempToStateClass(temp: number | undefined) {
+    if (temp === undefined || !!isNaN(temp)) return 'idle';
+    return Number(temp) > 14 ? 'heating' : 'cooling';
   }
 
   onMount(() => setInterval(updateTime, 1000));
@@ -24,41 +33,47 @@
 </script>
 
 <div class="card">
+  <h1>Fridge sensors</h1>
   <CardButton>
-    <Activity on:click={flipCard} />
+    <Activity on:click="{flipCard}" />
   </CardButton>
 
   <h2>Current target temperature</h2>
   <div class="sensor-reading">
-    <div class="blue">
-      <span class="value">{currentGoal}</span>
+    <div class="{state.state}">
+      <span class="value">{state.goal}</span>
       <span class="unit">°C</span>
-    </div>
-  </div>
-
-  <h2>Inside temperature</h2>
-  <div class="sensor-reading">
-    <div class="blue">
-      <span class="value">{inside?.temperature}</span>
-      <span class="unit">{inside?.temperature_unit}</span>
     </div>
 
     <div>
-      <span class="value">{Math.floor(inside?.humidity)}</span>
+      <span class="value"></span>
+      <span class="unit">{state.state}</span>
+    </div>
+  </div>
+
+  <h2>Inside frigde temperature</h2>
+  <div class="sensor-reading">
+    <div class="{tempToStateClass(inside?.temperature)}">
+      <span class="value">{inside?.temperature || 0}</span>
+      <span class="unit">{inside?.temperature_unit || '°C'}</span>
+    </div>
+
+    <div>
+      <span class="value">{Math.floor(inside?.humidity || 0)}</span>
       <span class="unit">{inside?.humidity_unit || '%'}</span>
     </div>
   </div>
 
   <h2>Outside temperature</h2>
   <div class="sensor-reading">
-    <div class="red">
-      <span class="value">{outside?.temperature}</span>
-      <span class="unit">{outside?.temperature_unit}</span>
+    <div class="{tempToStateClass(outside?.temperature)}">
+      <span class="value">{outside?.temperature || 0}</span>
+      <span class="unit">{outside?.temperature_unit || '°C'}</span>
     </div>
 
     <div>
-      <span class="value">{Math.floor(outside?.humidity)}</span>
-      <span class="unit">{outside?.humidity_unit}</span>
+      <span class="value">{Math.floor(outside?.humidity || 0)}</span>
+      <span class="unit">{outside?.humidity_unit || '%'}</span>
     </div>
   </div>
 
@@ -70,13 +85,15 @@
 
   <div class="button-timer">
     <span>Updated {secondsSinceUpdate === 0 ? 'now' : secondsSinceUpdate + 's ago'}</span>
-
-
   </div>
 </div>
 
 <style lang="scss" module="scoped">
   @import '../../styles/media-queries.scss';
+
+  .card {
+    position: relative;
+  }
 
   h2 {
     font-size: 1.4rem;
@@ -92,6 +109,7 @@
   .sensor-reading {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin-bottom: 1.75rem;
 
     font-size: 2.2rem;
@@ -117,12 +135,23 @@
       margin-left: 0.3rem;
     }
 
-    .red {
+    .info {
+      font-size: 1rem;
+      width: 100%;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .heating {
       color: var(--red);
     }
 
-    .blue {
+    .cooling {
       color: var(--blue);
+    }
+
+    .idle {
+      color: var(--green);
     }
   }
 
