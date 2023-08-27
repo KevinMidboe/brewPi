@@ -6,6 +6,7 @@
   --text-color: black;
   --red: #ff97a3;
   --blue: #9ad9ff;
+  --orange: orange;
   --green: #19a786;
 
   --header-height: 80px;
@@ -37,6 +38,21 @@ body {
 a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
+}
+
+a.link {
+  --color-text: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  -webkit-transition: -webkit-transform 0.15s linear;
+  transition: transform 0.15s linear;
+  -webkit-transform-origin: 50% 80%;
+  transform-origin: 50% 80%;
+  border-bottom: 2px solid var(--green);
+}
+a.link:hover {
+  border-color: white;
+  transform: skew(-15deg);
 }
 
 ul,
