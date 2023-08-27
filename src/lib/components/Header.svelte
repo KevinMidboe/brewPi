@@ -3,7 +3,7 @@
   import Navigation from './Navigation.svelte';
   import GithubIcon from '../icons/Github.svelte';
 
-  let open: boolean = false;
+  let open = false;
 
   function toggleMenu() {
     open = !open;
@@ -18,13 +18,13 @@
 
 {#if open}
   <div class="slideout-menu" transition:fly="{{ x: 550, duration: 300 }}">
-    <h1>Navigation</h1>
+    <h1>Page navigation</h1>
 
     <Navigation on:click="{close}" />
 
     <ul class="bottom-content">
       <li>
-        <a href="https://github.com/kevinmidboe/brewpi">
+        <a class="link" href="https://github.com/kevinmidboe/brewpi">
           <GithubIcon />
           <span class="meta">View on Github</span>
         </a>
@@ -55,19 +55,23 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh + 4px);
     width: 100vw;
     max-width: 550px;
     right: 0;
-    top: 0;
+    top: -2px;
     z-index: 10;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
 
-    background-color: #fff3f6;
+    background-color: var(--green);
     color: black;
     padding: calc(100px + 2rem) 2rem 1rem;
     border-top-left-radius: 4rem;
+    color: var(--background);
 
     h1 {
+      font-size: 3rem;
       padding-bottom: 4rem;
     }
 
@@ -124,7 +128,7 @@
       user-select: none;
 
       &.open {
-        background-color: salmon;
+        background-color: var(--background);
         color: black;
       }
 
