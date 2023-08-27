@@ -40,14 +40,14 @@
 
   <h2>Current target temperature</h2>
   <div class="sensor-reading">
-    <div class="{state.state}">
-      <span class="value">{state.goal}</span>
+    <div class="{state?.state}">
+      <span class="value">{state?.goal || 0}</span>
       <span class="unit">°C</span>
     </div>
 
     <div>
       <span class="value"></span>
-      <span class="unit">{state.state}</span>
+      <span class="unit">{state?.state || 'unknown'}</span>
     </div>
   </div>
 
