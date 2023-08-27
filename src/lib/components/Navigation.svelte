@@ -23,7 +23,10 @@ const routes: Array<IRoute> = [{
     <a href={route.path}>
       <li>
         <span>{ route.name }</span>
+
+        <i class="arrow">
         <ArrowRight />
+        </i>
       </li>
     </a>
   {/each}
@@ -33,7 +36,8 @@ const routes: Array<IRoute> = [{
 .navigation-cards a {
   display: block;
   border-radius: 2rem;
-  background: var(--green);
+  color: var(--text-color);
+  background: var(--background);
   transition: background-color var(--color-transition-duration) ease-in-out, transform 0.2s ease;
 
   &:hover {
@@ -50,8 +54,12 @@ const routes: Array<IRoute> = [{
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.75rem;
-    color: white;
     font-size: 1.3rem;
+
+    i {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }
 </style>
