@@ -1,5 +1,6 @@
 <script lang="ts">
   import Graph from '../../../lib/components/Graph.svelte';
+  import ArrowRight from '../../../lib/icons/ArrowRight.svelte';
   import IChartFrame from '../../../lib/interfaces/IChartFrame';
   let height: number;
 
@@ -19,12 +20,23 @@
   const wizards = brew.by.join(', ');
 </script>
 
+<a href="/brews" class="nav-back">
+  <ArrowRight />
+</a>
+
 <section class="card">
-  <div class="desktop-only image-container" style="height: {height}px; background-color: {brew.color_primary || '#93a4a0'}">
+  <div
+    class="desktop-only image-container"
+    style="height: {height}px; background-color: {brew.color_primary || '#93a4a0'}"
+  >
     <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
   </div>
 
-  <div class="beer-container" bind:clientHeight="{height}" style="background-color: {brew.color_secondary || '#DFE6E5'}">
+  <div
+    class="beer-container"
+    bind:clientHeight="{height}"
+    style="background-color: {brew.color_secondary || '#DFE6E5'}"
+  >
     <h1>{brew.beer.name}</h1>
 
     <div class="links">
@@ -57,7 +69,10 @@
       </tbody>
     </table>
 
-    <div class="mobile-only image-container" style="background-color: {brew.color_primary || '#93a4a0'}">
+    <div
+      class="mobile-only image-container"
+      style="background-color: {brew.color_primary || '#93a4a0'}"
+    >
       <img src="/images/{brew.image}" alt="Tuborg Sommerøl" aria-label="Tuborg Sommerøl" />
     </div>
 
@@ -66,17 +81,15 @@
 
     <div class="graph-container">
       {#if temperatureData && temperatureData?.length}
-        <div class="graph">
-          <h3>Temperature during fermentation</h3>
-          <Graph dataFrames="{temperatureData}" name="Temperature" hideTitle="{true}" />
-        </div>
-      {/if}
-
-      {#if humidityData && temperatureData?.length}
-        <div class="graph">
-          <h3>Humidity during carbonation</h3>
-          <Graph dataFrames="{humidityData}" name="Humidity" hideTitle="{true}" />
-        </div>
+      <div class="graph">
+        <h3>Temperature during fermentation</h3>
+        <Graph dataFrames="{temperatureData}" name="Temperature" hideTitle="{true}" />
+      </div>
+      {/if} {#if humidityData && temperatureData?.length}
+      <div class="graph">
+        <h3>Humidity during carbonation</h3>
+        <Graph dataFrames="{humidityData}" name="Humidity" hideTitle="{true}" />
+      </div>
       {/if}
     </div>
 
@@ -100,6 +113,24 @@
 
 <style lang="scss">
   @import '../../../styles/media-queries.scss';
+
+  .nav-back {
+    position: fixed;
+    top: 1.5rem;
+    left: 1rem;
+    width: 2rem;
+    height: 2rem;
+    transform: rotate(180deg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus {
+      scale: 1.3;
+      will-change: transform;
+      color: var(--green);
+    }
+  }
 
   section {
     @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@200;300;400;500;600;700;800&display=swap');
