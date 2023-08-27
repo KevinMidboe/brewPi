@@ -17,37 +17,35 @@
 </script>
 
 {#if open}
-  <div class="slideout-menu" transition:fly="{{ x: 550, duration: 300 }}">
-    <h1>Page navigation</h1>
+<div class="slideout-menu" transition:fly="{{ x: 550, duration: 300 }}">
+  <h1>Page navigation</h1>
 
-    <Navigation on:click="{close}" />
+  <Navigation on:click="{close}" />
 
-    <ul class="bottom-content">
-      <li>
-        <a class="link" href="https://github.com/kevinmidboe/brewpi">
-          <GithubIcon />
-          <span class="meta">View on Github</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+  <ul class="bottom-content">
+    <li>
+      <a class="link" href="https://github.com/kevinmidboe/brewpi">
+        <GithubIcon />
+        <span class="meta">View on Github</span>
+      </a>
+    </li>
+  </ul>
+</div>
 {/if}
 
 <header>
-  <div on:click="{toggleMenu}" class:open="{open}" aria-label="Open menu" class="menu">
+  <button on:click="{toggleMenu}" class:open="{open}" aria-label="Open menu" class="menu">
     {#if !open}
-      <span class="page-header-buttons__open">
-        <span></span> <span></span> <span></span>
-      </span>
+    <span class="page-header-buttons__open"> <span></span> <span></span> <span></span> </span>
     {:else}
-      <span class="page-header-buttons__close">
-        <span></span>
-        <span></span>
-      </span>
+    <span class="page-header-buttons__close">
+      <span></span>
+      <span></span>
+    </span>
     {/if}
 
     <span class="page-header-text">{headerText}</span>
-  </div>
+  </button>
 </header>
 
 <style lang="scss" module="scoped">
@@ -123,6 +121,9 @@
       transition: all 0.3s ease;
       cursor: pointer;
       pointer-events: auto;
+      -webkit-style: none;
+      border: none;
+      font-size: 1rem;
 
       -webkit-user-select: none;
       user-select: none;
