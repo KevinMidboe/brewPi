@@ -192,5 +192,6 @@
   .desktop-only {
     display: grid;
     max-height: 80px;
+    margin-bottom: 4rem;
   }
 </style>
