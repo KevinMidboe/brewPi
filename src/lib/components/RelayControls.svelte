@@ -1,37 +1,39 @@
 <script lang="ts">
   //  import { toggleRelay } from '$lib/server/relayToggle'
+  import { createEventDispatcher } from 'svelte';
   import Switch from './Switch.svelte';
+  import type { IRelaysDTO } from '../interfaces/IRelaysDTO';
 
-  export let relays = [];
+  export let relays: IRelaysDTO[] = [];
+  const dispatch = createEventDispatcher();
 
-  function toggleRelay(location) {
-    const url = `/api/relay/${location}`;
+  function toggleRelay(controls: string) {
+    const url = `/api/relay/${controls}`;
     const options = {
       method: 'POST'
     };
 
     fetch(url, options)
       .then((resp) => resp.json())
-      .then(console.log);
-  }
+      .then((response) => {
+        const changedRelay = relays.findIndex((relay) => relay.pin === response.pin);
+        relays[changedRelay] = response;
+      });
 
-  function handleChange(event) {
-    let isChecked = event.detail.checked;
-    // Perform any desired actions based on the new value
-    console.log('New value:', isChecked);
+    dispatch('relaySwitched');
   }
 </script>
 
 <div class="card">
-  <h1>Manual relay controls</h1>
+  <h1>Manual fridge controls</h1>
 
   <div class="vertical-sensor-display">
     {#each relays as relay}
     <div>
-      <h2>{relay.location} relay</h2>
+      <h2>{relay.controls} relay</h2>
 
       <div class="sensor-reading">
-        <Switch checked="{relay.state}" on:change="{() => toggleRelay(relay.location)}" />
+        <Switch checked="{relay.state}" on:change="{() => toggleRelay(relay.controls)}" />
       </div>
     </div>
     {/each}

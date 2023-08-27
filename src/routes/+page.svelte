@@ -7,7 +7,12 @@
   import type { IStateDTO } from '../lib/interfaces/IStateDTO';
 
   export let data: PageData;
-  const { inside, outside, relays } = data;
+  const { inside, outside } = data;
+  let { relays, state } = data;
+
+  const updateState = () => setTimeout(() => fetch('/api/state')
+      .then((resp) => resp.json())
+      .then((response: IStateDTO) => state = response), 100)
 </script>
 
 <Logo />
@@ -17,9 +22,7 @@
 
   <VerticalSensorDisplay {inside} {outside} {relays} {state} />
 
-  <RelayControls relays="{relays}" />
-
-  <!-- <Livestream /> -->
+  <RelayControls bind:relays="{relays}" on:relaySwitched={updateState} />
 </div>
 
 <style lang="scss">
