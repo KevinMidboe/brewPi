@@ -10,9 +10,12 @@
   const { inside, outside } = data;
   let { relays, state } = data;
 
-  const updateState = () => setTimeout(() => fetch('/api/state')
-      .then((resp) => resp.json())
-      .then((response: IStateDTO) => state = response), 100)
+  const updateState = () =>
+    setTimeout(() => {
+      fetch('/api/state')
+        .then((resp) => resp.json())
+        .then((response: IStateDTO) => (state = response));
+    }, 100);
 </script>
 
 <Logo />
@@ -22,7 +25,7 @@
 
   <VerticalSensorDisplay {inside} {outside} {relays} {state} />
 
-  <RelayControls bind:relays="{relays}" on:relaySwitched={updateState} />
+  <RelayControls bind:relays="{relays}" on:relaySwitched="{updateState}" />
 </div>
 
 <style lang="scss">
@@ -38,6 +41,16 @@
     @include desktop {
       grid-template-columns: 2fr 2fr 3fr;
       margin: 2rem;
+    }
+
+    @media (min-width: 900px) and (max-width: 1550px) {
+      grid-template-columns: 2fr 2fr;
+    }
+  }
+
+  :global(.vertical-grid > div:nth-child(3)) {
+    @media (min-width: 900px) and (max-width: 1550px) {
+      margin-top: -185px;
     }
   }
 </style>

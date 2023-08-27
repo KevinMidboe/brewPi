@@ -138,7 +138,8 @@
     }
 
     img {
-      max-width: 30%;
+      width: 30%;
+      max-width: 140px;
       margin-right: 1rem;
       border-radius: 1rem;
     }
