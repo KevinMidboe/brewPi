@@ -4,24 +4,31 @@
   import '../styles/global.css';
 </script>
 
-<HeaderComponent />
-<!-- <Darkmode/> -->
+<div class="app">
+  <HeaderComponent />
+  <!-- <Darkmode/> -->
 
-<div class="page-content">
-  <slot />
+  <main>
+    <slot />
+  </main>
 </div>
 
 <style lang="scss">
   @import '../styles/media-queries.scss';
 
-  .page-content {
+  .app {
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  main {
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - var(--header-height));
+    min-height: 95vh;
     margin: var(--header-height) 2.5rem 0;
 
     @include mobile {
       margin: var(--header-height) 1rem 0;
+      min-height: 85vh;
     }
   }
 </style>
