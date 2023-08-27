@@ -71,7 +71,7 @@
       icon: 'M15.623 5.014l-4.29 3.577c-.196.168-.327.362-.327.62v6.206c0 .322.335.584.656.584h2.004c.32 0 .584-.262.584-.584l-.033-3.115c0-.16.13-.29.29-.29h2.918c.16 0 .292.13.292.29l.033 3.116c0 .322.263.584.584.584h2.09c.322 0 .585-.262.585-.584V9.48c0-.257-.172-.626-.37-.792l-4.263-3.674c-.218-.184-.536-.184-.754 0zm7.17 2.374l-5.967-5.046C16.606 2.122 16.312 2 16 2c-.312 0-.606.123-.79.31L9.207 7.388c-.245.208-.276.576-.068.822.115.136.28.206.446.206.133 0 .266-.044.376-.137l5.69-4.847c.208-.155.49-.157.697-.002 1.286.962 5.693 4.85 5.693 4.85.246.206.614.177.822-.07.208-.246.177-.614-.068-.822z',
       name: 'Ready to drink',
       date: brew.dates.consume,
-      state: 'in-progress',
+      state: 'completed',
       description:
         'After the beer is bottled or kegged, it enters the carbonation stage. If priming sugar was added during the bottling stage, the remaining yeast in the beer consumes the sugar and produces carbon dioxide, naturally carbonating the beer over time. The sealed bottles or kegs are stored at a controlled temperature for a period of time to allow carbonation to occur. This process typically takes a few weeks, during which the flavors and aromas continue to develop. If kegging, carbonation can also be achieved through forced carbonation, where carbon dioxide is directly injected into the keg under pressure.'
     }
