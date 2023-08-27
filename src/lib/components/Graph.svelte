@@ -9,7 +9,8 @@
     PointElement,
     Tooltip,
     Title,
-    Legend
+    Legend,
+    Filler
   } from 'chart.js';
   import { getRelativePosition } from 'chart.js/helpers';
 
@@ -24,7 +25,8 @@
     PointElement,
     Tooltip,
     Title,
-    Legend
+    Legend,
+    Filler
   );
 
   export let name: string;
@@ -41,6 +43,8 @@
 
   // Converts Date to format suitable for the current range displayed
   function dateLabelsFormatedBasedOnResolution(dataFrames: IChartFrame[]): string[] {
+    if (dataFrames.length < 2) return ['NO DATA'];
+
     const firstFrame = dataFrames[0];
     const lastFrame = dataFrames[dataFrames.length - 1];
     const deltaSeconds =
@@ -69,25 +73,49 @@
     return dataFrames.map((frame) => scaledDate.format(frame.key));
   }
 
+  function hexToRgb(hex: string) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        }
+      : null;
+  }
+
+  function createLineBackgroundGradient(hex: string, context: CanvasRenderingContext2D) {
+    const gradient = context.createLinearGradient(0, 0, 0, 400);
+    const c = hexToRgb(hex);
+    if (c == null) return;
+
+    gradient.addColorStop(0.2, `rgb(${c.r}, ${c.g}, ${c.b}, 0.8)`);
+    gradient.addColorStop(1, `rgb(${c.r}, ${c.g}, ${c.b}, 0.2)`);
+    return gradient;
+  }
+
   // set dataset label & colors matching the name sent as prop
-  function setDataColorAndName(data: ChartDataset) {
+  function setDataColorAndName(data: ChartDataset, context: CanvasRenderingContext2D) {
     if (name === 'Pressure') {
       Object.assign(data, {
         label: 'Bar of pressure',
         borderColor: '#ef5878',
-        backgroundColor: '#fbd7de'
+        fill: true,
+        backgroundColor: createLineBackgroundGradient('#fbd7de', context)
       });
     } else if (name === 'Humidity') {
       Object.assign(data, {
         label: '% humidity',
         borderColor: '#57d2fb',
-        backgroundColor: '#d4f2fe'
+        fill: true,
+        backgroundColor: createLineBackgroundGradient('#d4f2fe', context)
       });
     } else if (name === 'Temperature') {
       Object.assign(data, {
         label: '℃ inside',
         borderColor: '#10e783',
-        backgroundColor: '#c8f9df'
+        fill: true,
+        backgroundColor: createLineBackgroundGradient('#c8f9df', context)
       });
     }
   }
@@ -97,13 +125,14 @@
     if (!context) return;
 
     // create labels and singular dataset (data)
-    const labels: string[] = dateLabelsFormatedBasedOnResolution(dataFrames);
+    const labels = dateLabelsFormatedBasedOnResolution(dataFrames);
     const data: ChartDataset = {
       data: dataFrames.map((frame) => frame.value),
       borderWidth: 3
     };
+
     // based on name, add label and color options to dataset
-    setDataColorAndName(data);
+    setDataColorAndName(data, context);
 
     // create chart instance, most here is chart options
     chart = new Chart(context, {
@@ -152,7 +181,7 @@
                 speed: 0.001
               },
               // pinch: {
-              // 	enabled: true
+              //  enabled: true
               // },
               mode: 'xy'
             }
@@ -174,7 +203,6 @@
         scales: {
           y: {
             beginAtZero: false,
-            offset: true,
             ticks: {
               color: 'black'
             },
