@@ -52,8 +52,18 @@
     }
 
     ul {
+      display: grid;
+      grid-template-columns: 1fr;
       margin: 0;
       border-radius: inherit;
+
+      @include tablet {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include desktop {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   }
 
@@ -123,7 +133,7 @@
     }
 
     .brew a {
-      grid-template-columns: 80px 1fr;
+      grid-template-columns: 120px 1fr;
 
       img {
         margin-top: 0.5rem;
