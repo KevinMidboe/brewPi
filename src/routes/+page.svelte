@@ -8,14 +8,13 @@
 
   export let data: PageData;
   const { inside, outside } = data;
-  let { relays, state } = data;
+  let { relays, regulator } = data.state;
 
-  const updateState = () =>
-    setTimeout(() => {
-      fetch('/api/state')
-        .then((resp) => resp.json())
-        .then((response: IStateDTO) => (state = response));
-    }, 100);
+  const updateState = () => {
+    fetch('/api/state')
+      .then((resp) => resp.json())
+      .then((response: IStateDTO) => ({ relays, regulator } = response));
+    }
 </script>
 
 <Logo />
@@ -23,7 +22,12 @@
 <div class="vertical-grid">
   <BrewProgress />
 
-  <VerticalSensorDisplay {inside} {outside} {relays} {state} />
+  <VerticalSensorDisplay
+    inside="{inside}"
+    outside="{outside}"
+    relays="{relays}"
+    state="{regulator}"
+  />
 
   <RelayControls bind:relays="{relays}" on:relaySwitched="{updateState}" />
 </div>
