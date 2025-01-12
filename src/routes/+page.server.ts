@@ -5,8 +5,7 @@ import { IRelaysDTO } from '../lib/interfaces/IRelaysDTO';
 import { IStateDTO } from '../lib/interfaces/IStateDTO';
 
 const sensorsUrl = `${BREWLOGGER_HOST}/api/sensors`;
-const relaysUrl = `${BREWLOGGER_HOST}/api/relays`;
-const stateUrl = `${BREWLOGGER_HOST}/api/regulator`;
+export const prerender = true; // explicitly pre-render
 
 async function getFromEndpoint(endpoint: string)  {
   return fetch(endpoint)
