@@ -7,13 +7,13 @@
   export let relays: IRelaysDTO[] = [];
   const dispatch = createEventDispatcher();
 
-  function toggleRelay(controls: string) {
+  async function toggleRelay(controls: string) {
     const url = `/api/relay/${controls}`;
     const options = {
       method: 'POST'
     };
 
-    fetch(url, options)
+    await fetch(url, options)
       .then((resp) => resp.json())
       .then((response) => {
         const changedRelay = relays.findIndex((relay) => relay.pin === response.pin);

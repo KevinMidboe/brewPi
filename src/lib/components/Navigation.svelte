@@ -20,7 +20,7 @@ const routes: Array<IRoute> = [{
 
 <ul class="navigation-cards" on:click>
   {#each routes as route}
-    <a href={route.path}>
+    <a href={route.path} data-sveltekit-preload-data="hover">
       <li>
         <span>{ route.name }</span>
 

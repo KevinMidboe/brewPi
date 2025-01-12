@@ -4,8 +4,9 @@ import { fetchHumidity, fetchTemperature } from '../../../lib/server/graphQueryG
 import type { PageLoad } from './$types';
 
 async function fetchGraphData(brew) {
-  const start = new Date(brew.date * 1000 - 86400000);
-  const end = new Date(brew.date * 1000 + 4838400000);
+  const { date } = brew;
+  const start = new Date(date * 1000 - 86400000);
+  const end = new Date(date * 1000 + 4838400000);
   const size = 200;
 
   const [temperature, humidity] = await Promise.all([
@@ -13,10 +14,7 @@ async function fetchGraphData(brew) {
     fetchHumidity(start, end, size)
   ]);
 
-  return {
-    temperature,
-    humidity
-  };
+  return { temperature, humidity };
 }
 
 export const load = (async ({ params }) => {
