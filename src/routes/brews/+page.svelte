@@ -17,7 +17,7 @@
   <ul>
     {#each brews as brew}
     <li class="brew">
-      <a href="{path(brew.date)}">
+      <a href="{path(brew.date)}" data-sveltekit-preload-data="hover">
         <img src="/images/{brew.image}" alt="Beer label of {brew.beer.name}" />
 
         <div class="details">
